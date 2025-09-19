@@ -1,12 +1,14 @@
-# n8n + ffmpeg (Debian veya Alpine tabanı ile uyumlu)
+
+
 FROM docker.n8n.io/n8nio/n8n:1.109.2
 
-# ffmpeg, libass ve fontlar (hard-subtitle için gerekli)
+# Paket kurarken root ol
 USER root
-RUN apk add --no-cache ffmpeg libass ttf-dejavu fontconfig; \
 
-# normal kullanıcıya dön
+# FFmpeg ve altyazı fontları (ASS için) — tek satır, \ yok
+RUN apk add --no-cache ffmpeg libass ttf-dejavu fontconfig
+
+# n8n default kullanıcıya geri dön
 USER node
-
 ENV N8N_PORT=5678
 EXPOSE 5678
